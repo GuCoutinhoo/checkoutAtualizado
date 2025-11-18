@@ -17,93 +17,43 @@
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
-
-body{
-  font-family:'Montserrat',sans-serif;
-  background:var(--bg);
-  padding:28px;
-  color:#222;
-}
-
+body{ font-family:'Montserrat',sans-serif; background:var(--bg); padding:28px; color:#222; }
 .wrapper{ max-width:900px; margin:0 auto; }
-
 .steps-shell{ display:flex; gap:18px; align-items:center; margin-bottom:18px; flex-wrap:wrap; }
-
 .steps{ flex:1; display:flex; gap:8px; align-items:center; }
-
 .step{ flex:1; text-align:center; padding:8px 10px; color:var(--muted); font-weight:600; font-size:14px; }
-
-.step .bubble{
-  width:36px; height:36px; margin:0 auto 8px;
-  border-radius:50%; background:#eee;
-  display:flex; align-items:center; justify-content:center;
-  font-weight:700; color:#666;
-}
-
+.step .bubble{ width:36px; height:36px; margin:0 auto 8px; border-radius:50%; background:#eee; display:flex; align-items:center; justify-content:center; font-weight:700; color:#666; }
 .step.active{ color:var(--accent) }
 .step.active .bubble{ background:var(--accent); color:#fff; }
-
 .progress-bar{ height:8px; background:#e6e6e6; border-radius:8px; overflow:hidden; margin-top:10px; }
 .progress{ height:100%; width:0%; background:linear-gradient(90deg, #111, #444); transition:width .5s ease; }
-
-.card{
-  background:var(--card);
-  border-radius:var(--radius);
-  box-shadow:0 8px 30px rgba(16,24,40,0.06);
-  padding:22px;
-}
-
+.card{ background:var(--card); border-radius:var(--radius); box-shadow:0 8px 30px rgba(16,24,40,0.06); padding:22px; }
 .grid{ display:grid; grid-template-columns:1fr 360px; gap:18px; }
 .step-view{ min-height:380px; position:relative; overflow-y:auto; padding-right:8px; }
-section.form-step{
-  position:absolute; inset:0; padding:6px;
-  transition: transform .45s, opacity .32s;
-  opacity:0; transform:translateX(30px); pointer-events:none;
-}
-
-section.form-step.active{
-  opacity:1; transform:translateX(0); pointer-events:auto;
-}
-
+section.form-step{ position:absolute; inset:0; padding:6px; transition: transform .45s, opacity .32s; opacity:0; transform:translateX(30px); pointer-events:none; }
+section.form-step.active{ opacity:1; transform:translateX(0); pointer-events:auto; }
 h2.title{ margin-bottom:12px; font-size:20px; }
-
 label{ display:block; font-weight:600; font-size:13px; margin-top:12px; }
-
-input{
-  width:100%; padding:10px 12px; margin-top:8px;
-  border-radius:10px; border:1px solid #ddd; font-size:14px;
-}
-
+input{ width:100%; padding:10px 12px; margin-top:8px; border-radius:10px; border:1px solid #ddd; font-size:14px; }
 .row{ display:flex; gap:10px; }
 .col{ flex:1; }
-
-.btn{
-  padding:12px 16px; background:var(--accent);
-  color:#fff; border-radius:10px;
-  cursor:pointer; font-weight:700; border:0;
-}
-
+.btn{ padding:12px 16px; background:var(--accent); color:#fff; border-radius:10px; cursor:pointer; font-weight:700; border:0; }
 .btn.ghost{ background:transparent; color:var(--accent); border:1px solid #eee; }
-
 .actions{ margin-top:18px; display:flex; gap:10px; justify-content:space-between; }
-
-.summary{
-  background:#fbfbfb; border-radius:10px;
-  padding:14px; border:1px solid #f0f0f0;
-}
-
+.summary{ background:#fbfbfb; border-radius:10px; padding:14px; border:1px solid #f0f0f0; }
 .items{ max-height:220px; overflow:auto; margin-bottom:8px; padding-right:6px; }
 .item{ display:flex; justify-content:space-between; margin:8px 0; font-size:14px; }
-
 #wallet_container{ margin-top:22px; }
+@media(max-width:800px){
+  .grid{ grid-template-columns:1fr; }
+  aside{ margin-top:16px; }
+}
 </style>
 </head>
-
 <body>
 
 <div class="wrapper">
 
-  <!-- Barra de passos -->
   <div class="steps-shell">
     <div style="flex:1">
       <div class="steps">
@@ -119,51 +69,29 @@ input{
   <div class="card">
     <div class="grid">
 
-      <!-- Coluna esquerda -->
       <div>
         <div class="step-view">
 
-          <!-- STEP 1 -->
           <section id="step-1" class="form-step active">
             <h2 class="title">Endereço de entrega</h2>
-
-            <label>CEP</label>
-            <input id="cep">
-
-            <label>Rua</label>
-            <input id="street">
-
-            <label>Bairro</label>
-            <input id="neighborhood">
-
+            <label>CEP</label><input id="cep">
+            <label>Rua</label><input id="street">
+            <label>Bairro</label><input id="neighborhood">
             <div class="row">
-              <div class="col">
-                <label>Cidade</label>
-                <input id="city">
-              </div>
-              <div style="width:110px">
-                <label>UF</label>
-                <input id="state" maxlength="2">
-              </div>
+              <div class="col"><label>Cidade</label><input id="city"></div>
+              <div style="width:110px"><label>UF</label><input id="state" maxlength="2"></div>
             </div>
-
-            <label>Número</label>
-            <input id="number">
-
-            <label>Complemento</label>
-            <input id="complement">
-
+            <label>Número</label><input id="number">
+            <label>Complemento</label><input id="complement">
             <div class="actions">
               <div class="small">Total: <strong id="preview-total">R$0,00</strong></div>
               <button class="btn" id="to-payment">Continuar →</button>
             </div>
           </section>
 
-          <!-- STEP 2 -->
           <section id="step-2" class="form-step">
             <h2 class="title">Pagamento</h2>
             <div id="wallet_container"></div>
-
             <div class="actions">
               <button class="btn ghost" id="back-to-address">← Voltar</button>
             </div>
@@ -172,13 +100,10 @@ input{
         </div>
       </div>
 
-      <!-- Coluna direita (Resumo) -->
       <aside>
         <div class="summary">
           <h3>Resumo do pedido</h3>
-
           <div id="items-list" class="items"></div>
-
           <div style="display:flex;justify-content:space-between;margin-top:12px;font-weight:700">
             <div>Total</div>
             <div id="total-valor">R$0,00</div>
@@ -191,29 +116,18 @@ input{
 </div>
 
 <script>
-// Carrinho fake
-const cart = [
-  { name: "Produto Teste", qty: 1, price: 50 }
-];
+const cart = [ { name: "Produto Teste", qty: 1, price: 50 } ];
 
 function updateSummary() {
   const itemsList = document.getElementById("items-list");
   const totalEl = document.getElementById("total-valor");
   const preview = document.getElementById("preview-total");
-
   let total = 0;
   itemsList.innerHTML = "";
-
   cart.forEach(p => {
     total += p.price * p.qty;
-    itemsList.innerHTML += `
-      <div class="item">
-        <div>${p.name} x${p.qty}</div>
-        <div>R$${(p.price*p.qty).toFixed(2)}</div>
-      </div>
-    `;
+    itemsList.innerHTML += `<div class="item"><div>${p.name} x${p.qty}</div><div>R$${(p.price*p.qty).toFixed(2)}</div></div>`;
   });
-
   window._total = total;
   totalEl.textContent = "R$" + total.toFixed(2);
   preview.textContent = "R$" + total.toFixed(2);
@@ -221,43 +135,23 @@ function updateSummary() {
 updateSummary();
 
 document.getElementById("to-payment").onclick = async () => {
-  const itemsMP = cart.map(p => ({
-    title: p.name,
-    quantity: p.qty,
-    unit_price: Number(p.price)
-  }));
-
+  const itemsMP = cart.map(p => ({ title:p.name, quantity:p.qty, unit_price:Number(p.price) }));
   try {
     const req = await fetch("http://localhost:3001/create_preference", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+      method:"POST",
+      headers:{ "Content-Type":"application/json" },
       body: JSON.stringify({ items: itemsMP })
     });
-
     const res = await req.json();
-
-    if (!res.id) {
-      alert("Erro ao iniciar pagamento!");
-      return;
-    }
-
-    // Passa para step 2
+    if(!res.id){ alert("Erro ao iniciar pagamento!"); return; }
     document.getElementById("step-1").classList.remove("active");
     document.getElementById("step-2").classList.add("active");
     document.getElementById("label-step-1").classList.remove("active");
     document.getElementById("label-step-2").classList.add("active");
-    document.getElementById("progress").style.width = "50%";
-
-    const mp = new MercadoPago("APP_USR-a070dd55-58fb-49f3-b531-1d869b024d15", { locale: "pt-BR" });
-
-    mp.bricks().create("wallet", "wallet_container", {
-      initialization: { preferenceId: res.id }
-    });
-
-  } catch (err) {
-    console.error("Erro no fetch:", err);
-    alert("Não foi possível conectar ao servidor. Veja o console.");
-  }
+    document.getElementById("progress").style.width="50%";
+    const mp = new MercadoPago("APP_USR-a070dd55-58fb-49f3-b531-1d869b024d15",{ locale:"pt-BR" });
+    mp.bricks().create("wallet","wallet_container",{ initialization:{ preferenceId:res.id } });
+  } catch(err){ console.error(err); alert("Não foi possível conectar ao servidor"); }
 };
 
 document.getElementById("back-to-address").onclick = () => {
@@ -265,7 +159,7 @@ document.getElementById("back-to-address").onclick = () => {
   document.getElementById("step-1").classList.add("active");
   document.getElementById("label-step-2").classList.remove("active");
   document.getElementById("label-step-1").classList.add("active");
-  document.getElementById("progress").style.width = "0%";
+  document.getElementById("progress").style.width="0%";
 };
 </script>
 
