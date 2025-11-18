@@ -1,21 +1,20 @@
+// server.js
 import express from "express";
 import cors from "cors";
-import { MercadoPagoConfig, Preference } from "mercadopago";
+import { MercadoPago } from "@mercadopago/sdk-node";
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Access Token REAL (nunca coloque no front-end!)
-const client = new MercadoPagoConfig({
+// Configurar o Access Token do Mercado Pago (NUNCA coloque no front)
+const mp = new MercadoPago({
   accessToken: "APP_USR-5079596909849619-111808-bb8409b6a366cbaadb074c81de680f9a-521005600"
 });
 
-const preference = new Preference(client);
-
 app.post("/create_preference", async (req, res) => {
   try {
-    const body = {
+    const preference = {
       items: req.body.items,
       back_urls: {
         success: "https://seu-dominio.com/sucesso.html",
@@ -25,19 +24,15 @@ app.post("/create_preference", async (req, res) => {
       auto_return: "approved"
     };
 
-    const result = await preference.create({ body });
-
-    res.json({ id: result.id });
-
+    const response = await mp.preferences.create(preference);
+    res.json({ id: response.body.id });
   } catch (error) {
     console.error("ERRO AO CRIAR PREFERENCE:", error);
-    res.status(500).json({
-      error: "Erro ao criar preference",
-      details: error
-    });
+    res.status(500).json({ error: "Erro ao criar preference", details: error });
   }
 });
 
-app.listen(3001, () => {
-  console.log("Servidor rodando em http://localhost:3001");
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+  console.log(`Servidor rodando em http://localhost:${PORT}`);
 });
